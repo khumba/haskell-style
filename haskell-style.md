@@ -17,8 +17,9 @@ Unicode equivalents of `->`, `=>`, `::`, `forall`, etc.
 
 ### Line length
 
-Maximum 100 characters, but feel free to wrap earlier than necessary.
-Exceptions are things that shouldn't be broken, for example long paths or URLs.
+Maximum 100 characters, but feel free to wrap earlier than necessary (e.g. it's
+easier to read 80-character English paragraphs than 100-character).  Exceptions
+are things that shouldn't be broken, for example long paths or URLs.
 
 ### Whitespace
 
