@@ -193,8 +193,8 @@ Single- or few-letter qualified module names (`import qualified
 Data.ByteString.Lazy as BL`) are fine as long as you are consistent with your
 abbreviation usage in your project.
 
-Always give modules export lists.  Either the complete module declaration should
-fit on one line:
+Every module with a `module` line should have an export list.  Either the
+complete module declaration should fit on one line:
 
     module My.Awesome.Module (foo, bar, baz, quux, quuux) where
 
