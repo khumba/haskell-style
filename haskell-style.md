@@ -2,7 +2,7 @@
 
 This is [Khumba's](http://khumba.net) style guide for Haskell source code.
 
-*Legalese: Copyright 2015 Bryan Gardiner.  Licensed under the
+*Copyright 2015, 2016 Bryan Gardiner.  Licensed under the
 [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).*
 
 ## Formatting
@@ -115,8 +115,9 @@ increase the indentation by two spaces.  When writing an `if` or `let` within a
 ### The application operator
 
 `$` versus parentheses: prefer the shorter one for your use case, choosing `$`
-if the lengths are equal (which they will be in the common case).  Parentheses
-may be better in other cases, for example:
+if the lengths are equal (which they will be in the common case).  Generally `$`
+is preferred, but parentheses may be better in other cases, for example when
+there is symmetry between a function's arguments:
 
     foo (bar a) (bar b)
 
@@ -135,12 +136,12 @@ prefer this:
 ### Lists
 
 Single-line lists should be formatted like `[foo, bar, baz]` without spaces on
-the inside of the brackets.  Multi-line lists can use either
+the inside of the brackets.  Multi-line lists can use either the compact
 
     [foo, bar,
      baz, quux, quuux]
 
-or
+or one-line-per-element
 
     [ foo
     , bar
@@ -193,10 +194,12 @@ Single- or few-letter qualified module names (`import qualified
 Data.ByteString.Lazy as BL`) are fine as long as you are consistent with your
 abbreviation usage in your project.
 
-Every module with a `module` line should have an export list.  Either the
-complete module declaration should fit on one line:
+Every module with a `module` line should have an export list.  A complete module
+or import declaration should either fit on one line:
 
     module My.Awesome.Module (foo, bar, baz, quux, quuux) where
+
+    import Other.Awesome.Module (asdf, zxcv, qwerty)
 
 or it should be wrapped as follows:
 
@@ -209,8 +212,14 @@ or it should be wrapped as follows:
       ),
       ) where
 
-with commas at the end of lines that allow them.  Outer exports can always be
-followed by a comma, but a final trailing comma is not allowed in a sub-export.
+    import Other.Awesome.Module (
+      asdf, zxcv, qwerty,
+      om (nom, onom),
+    )
+
+with commas at the end of lines that allow them.  Outer imports/exports can
+always be followed by a comma, but a final trailing comma is not allowed in a
+sub-import/export.
 
 ### Type signatures
 
@@ -279,5 +288,5 @@ Use hyperlinks liberally.  If you're going to `@wrap@` a name, you might as well
 
 Avoid reduncancy, refactoring when appropriate.  This also applies to syntactic
 elements: clean up unused imports, remove unnecessary `do`s, and in general
-listen to the suggestings of HLint.  Code should compile warning-free with `-W`
-enabled.
+listen to the suggestings of HLint.  Code should compile warning-free with `-W
+-fwarn-incomplete-patterns -fwarn-unused-do-bind`.
